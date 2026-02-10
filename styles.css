@@ -24,9 +24,34 @@ body {
     radial-gradient(1200px 600px at 20% 10%, #fff7fb 0%, transparent 60%),
     radial-gradient(1000px 700px at 85% 85%, #ffe0e7 0%, transparent 60%),
     linear-gradient(135deg, var(--bg-1), var(--bg-2));
+  overflow: hidden;
 }
 
-.card {
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(255, 105, 135, 0.25), transparent 65%);
+  filter: blur(2px);
+  animation: drift 10s ease-in-out infinite;
+  pointer-events: none;
+}
+
+body::before {
+  top: -60px;
+  left: -40px;
+}
+
+body::after {
+  bottom: -80px;
+  right: -40px;
+  animation-delay: 2s;
+}
+
+.card,
+.container {
   width: min(680px, 92vw);
   padding: 36px 30px 28px;
   text-align: center;
@@ -36,9 +61,11 @@ body {
   backdrop-filter: blur(6px);
   position: relative;
   overflow: hidden;
+  animation: pop-in 0.7s ease;
 }
 
-.card::after {
+.card::after,
+.container::after {
   content: "";
   position: absolute;
   inset: -40% -20% auto;
@@ -77,6 +104,7 @@ h1 {
   margin: 6px 0 12px;
   flex-wrap: wrap;
   position: relative;
+  min-height: 70px;
 }
 
 button {
@@ -97,6 +125,7 @@ button:focus-visible {
 .yes-button {
   background: var(--yes);
   color: #fff;
+  animation: pulse 2.4s ease-in-out infinite;
 }
 
 .no-button {
@@ -105,7 +134,7 @@ button:focus-visible {
 }
 
 .no-button.runaway {
-  position: relative;
+  position: absolute;
   transition: transform 0.12s ease;
 }
 
@@ -115,6 +144,10 @@ button:focus-visible {
 
 button:hover {
   transform: translateY(-2px);
+}
+
+.no-button:hover {
+  animation: shake 0.35s ease;
 }
 
 .status {
@@ -136,6 +169,12 @@ button:hover {
   border-radius: 16px;
   margin-top: 12px;
   animation: float 4s ease-in-out infinite;
+}
+
+.caption {
+  margin: 10px 0 0;
+  font-size: 0.95rem;
+  color: #8a4b59;
 }
 
 .confetti {
@@ -172,6 +211,38 @@ button:hover {
   50% {
     transform: translateY(-10px);
   }
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0.98);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  75% { transform: translateX(-2px); }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(18px); }
 }
 
 @media (max-width: 480px) {
