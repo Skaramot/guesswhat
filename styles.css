@@ -1,0 +1,193 @@
+﻿:root {
+  --bg-1: #ffe6ea;
+  --bg-2: #ffeef6;
+  --card: rgba(255, 255, 255, 0.9);
+  --text: #2b1b1f;
+  --accent: #de3d59;
+  --yes: #1f9d55;
+  --no: #e23a3a;
+  --shadow: rgba(60, 20, 30, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text);
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(1200px 600px at 20% 10%, #fff7fb 0%, transparent 60%),
+    radial-gradient(1000px 700px at 85% 85%, #ffe0e7 0%, transparent 60%),
+    linear-gradient(135deg, var(--bg-1), var(--bg-2));
+}
+
+.card {
+  width: min(680px, 92vw);
+  padding: 36px 30px 28px;
+  text-align: center;
+  background: var(--card);
+  border-radius: 26px;
+  box-shadow: 0 24px 60px var(--shadow);
+  backdrop-filter: blur(6px);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: -40% -20% auto;
+  height: 220px;
+  background: radial-gradient(circle, rgba(222, 61, 89, 0.18), transparent 60%);
+  pointer-events: none;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  border-radius: 999px;
+  background: rgba(222, 61, 89, 0.12);
+  color: #9c2a3c;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-family: "Playfair Display", "Georgia", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 0 0 8px;
+  color: var(--accent);
+}
+
+.subtitle {
+  margin: 0 0 22px;
+  font-size: 1.05rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 6px 0 12px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+button {
+  font-size: 1.05rem;
+  padding: 12px 26px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+button:focus-visible {
+  outline: 3px solid rgba(222, 61, 89, 0.35);
+  outline-offset: 4px;
+}
+
+.yes-button {
+  background: var(--yes);
+  color: #fff;
+}
+
+.no-button {
+  background: var(--no);
+  color: #fff;
+}
+
+.no-button.runaway {
+  position: relative;
+  transition: transform 0.12s ease;
+}
+
+.no-button.is-yes {
+  background: var(--yes);
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.status {
+  min-height: 24px;
+  margin: 10px 0 6px;
+  font-weight: 600;
+  color: #7b2a3a;
+}
+
+.fineprint {
+  margin: 8px 0 0;
+  font-size: 0.9rem;
+  color: #8a4b59;
+}
+
+.gif_container img {
+  width: min(320px, 80vw);
+  height: auto;
+  border-radius: 16px;
+  margin-top: 12px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.confetti {
+  position: relative;
+  height: 30px;
+  margin-top: 6px;
+}
+
+.confetti span {
+  position: absolute;
+  top: 0;
+  animation: pop 0.9s ease forwards;
+  font-size: 1.2rem;
+}
+
+@keyframes pop {
+  0% {
+    transform: translateY(6px) scale(0.6);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-22px) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 28px 20px 22px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
